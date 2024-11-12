@@ -37,6 +37,7 @@ def debug_routing_info():
 
 def do_get_routing_group(routing_info: RoutingGroupExternalBody, headers: Headers):
     try:
+        #  Sample logic
         if (routing_info.trinoRequestUser is not None
                 and routing_info.trinoRequestUser.userInfo is not None
                 and 'role' in routing_info.trinoRequestUser.userInfo):
