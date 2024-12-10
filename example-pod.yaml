@@ -1,0 +1,36 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: routing-service
+  namespace: default
+  labels:
+    app.kubernetes.io/name: routing-service
+spec:
+  containers:
+    - image: willmo/routing-service:0.2-amd64
+      command: ["gunicorn", "-w", "1", "--bind", "0.0.0.0:9000", "getrouting:app"]
+      imagePullPolicy: IfNotPresent
+      name: routing-service
+      ports:
+        - containerPort: 9000
+          name: routing-service
+      env:
+        - name: PYTHONUNBUFFERED
+          value: "1"
+  restartPolicy: Always
+
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: routing-service
+  namespace: default
+spec:
+  selector:
+    app.kubernetes.io/name: routing-service
+  ports:
+  - name:
+    protocol: TCP
+    port: 9000
+    targetPort: routing-service

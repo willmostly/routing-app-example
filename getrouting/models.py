@@ -34,7 +34,7 @@ class TrinoQueryProperties(JsonDataClass):
 
 @dataclass
 class TrinoRequestUser(JsonDataClass):
-    user: str
+    user: Optional[str]
     userInfo: Optional[Dict[str, str]]
 
 

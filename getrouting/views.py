@@ -25,9 +25,9 @@ def get_routing_group():
 
 @app.route("/debug-routing-info", methods=['POST'])
 def debug_routing_info():
+    print(f'Headers: {request.headers}')
     routing_info = RoutingGroupExternalBody.from_json(request.get_data(as_text=True))
     print(f'Deserialized data: {routing_info}')
-    print(f'Headers: {request.headers}')
     if save_input_in_debug_mode:
         save_input(routing_info, request.headers)
     routing_group = do_get_routing_group(routing_info, request.headers)
